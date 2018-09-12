@@ -1,0 +1,58 @@
+Day 35: 
+Opinion Collector
+Goal
+To reinforce an understanding of configuration and environment variables by sending an email using sendgrid. 
+Learning Objectives
+By the end of this exercise the student will be able to:
+configure a web application to send emails. 
+utilize environment variables to hide sensitive data in their code. 
+troubleshoot an api with postman. 
+Introduction
+The year is 2109 - McDonald's and Wendy's have taken over as the dominant parties in the United States. 
+As a political analyst (NYCDA taught everyone to code by 2109) you need to build a single page web app for the New York Post to collect people’s opinions about the two candidates. The theme for the page would be “Let the new york post know what you think about the 2109 Presidential Campaign”. It should have pictures representing both parties (brands) with a form at the center to collect data. This data should be emailed to you, so it functions just like a contact form - but tailored to collect specific data. 
+Setup
+Create a new folder for your project, you can call it opinion_collector. 
+If you haven’t already, you should install postman: https://www.getpostman.com/ 
+Go through this quick tutorial if you haven’t used postman before: https://www.getpostman.com/docs/postman/launching_postman/sending_the_first_request 
+Take the time to collect some assets for your page, be as creative as you can - the public needs to see these brands for what they are. 
+https://www.wendys.com/ 
+https://www.mcdonalds.com/us/en-us.html 
+Create the following files and directories for your sinatra app:
+├── app.rb
+├── Gemfile
+└── views
+    └── index.erb
+
+
+Instructions
+Part 1 - Boilerplate
+First off let’s create the sinatra app. It should have two routes, the index route (GET ‘/’) that displays the homepage (‘index.erb’) and a route to process the form submission (POST ‘/contact’). Don’t worry about the body of the second route yet, you can do that later. 
+Next let’s create the homepage. You should only dedicate ⅓ of your workshop time to this, since there’s still some significant work to do in order to get the contact form itself working.
+The homepage should have a header and a footer. 
+The body of it should have a paragraph that explains the purpose of the app: "Submit your opinion about the 2109 elections! Hi voter, we're collecting data on what the general public think of the two major parties running in the 2109 elections."
+The form should be a textfield for the visitor's name, a text area for the visitor's comment and a submit button. 
+Part 2 - Configuration
+Next up let’s add SendGrid to your project by adding gem 'sendgrid-ruby' to your Gemfile. After you do that and run bundle to make sure it's installed.  
+Follow the instructions in Sendgrid readme for sending your first email: https://github.com/sendgrid/sendgrid-ruby#quick-start. Just remember configuration options (like to and sg client) go above your routes. The "to" field in the configuration and when sending emails should be your own email address. 
+The information that would change every time the contact form is submitted should go into your POST route (body, subject, etc). 
+Of course you won't want to put your SENGRID_API_KEY in your code. There's lots of bots on github that scrape around for that kind of information. You should protect that with an environment variable. There's several ways to do this with ruby: https://goo.gl/NEbMha. Note: Mac users would need to add their variables to the ~/.bash_profile file instead of ~/.bashrc. 
+Part 3 - Sending Emails
+Now you can work on the post route for the form. It should take the body of the request and send an email from it:
+At this point you can test your route with postman as you build it. Just remember your form is parsing formdata, so that's the kind of data you should send with postman.
+For now this can be a plain text email, since it's just for your records. 
+This route should render the homepage after it finishes attempting to send the email.
+ If there was an error it should make the error available in an instance variable(@error). How would you make the homepage display this error if it exists? 
+If all went well with postman, and you can see the email in your inbox, then it should work without a problem with the form on your webpage. If it doesn't, double-check that the form's method is POST and the action is /contact.
+Don't be frustrated if you get held up in this step! This is the hardest part.
+Completion Requirements
+Complete Workshop by end of allotted time limit.
+The completed webapp
+Has two routes in the server file.
+Has at least one page.
+Successfully sends emails to the creator's email account.
+Is at least moderately styled with some creative flair. 
+Group review session with the instructor. 
+
+
+
+

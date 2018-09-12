@@ -1,0 +1,11 @@
+.body {
+  padding: 20px;
+  background-color: khaki;
+}
+.selection{
+  font-weight: bolder;
+  font-size: 30px;
+}
+.inputSuff{
+  color: rgb(44, 26, 19);
+}
